@@ -1,6 +1,8 @@
 # DriveSafe Calgary
 *Real-time traffic incident monitoring and visualization for Calgary*
 
+A full-stack web application providing live traffic incident data, interactive mapping, and nearby traffic camera feeds for Calgary. Built with React frontend and Python Flask backend consuming Calgary Open Data APIs. Currently serving 1200+ active users.
+
 
 ## Live Demo
 **🌐 [View Live Application](www.drivesafecalgary.ca)**
