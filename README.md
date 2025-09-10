@@ -1,6 +1,10 @@
 # DriveSafe Calgary
 *Real-time traffic incident monitoring and visualization for Calgary*
 
+
+## Live Demo
+**🌐 [View Live Application](www.drivesafecalgary.ca)**
+
 A full-stack web application providing live traffic incident data, interactive mapping, and nearby traffic camera feeds for Calgary. Built with React frontend and Python Flask backend consuming Calgary Open Data APIs.
 
 ## Features
@@ -25,8 +29,6 @@ A full-stack web application providing live traffic incident data, interactive m
 * **Requests** - HTTP library for API calls
 * **Gunicorn** - WSGI HTTP server
 
-## Live Demo
-**🌐 [View Live Application](https://your-live-url-here.com)**
 
 Access real-time Calgary traffic data, explore incident locations on an interactive map, and view nearby traffic camera feeds.
 
@@ -72,7 +74,7 @@ GET    /api/incident-with-cameras?id=     # Get incident + cameras
 **Auto-Refresh**: Live data updates without manual page refresh
 
 ## Deployment
-Backend deployed on Heroku with environment variable configuration. Frontend deployed on your preferred hosting platform with environment-based API URL configuration.
+Backend deployed on Heroku with environment variable configuration. Frontend deployed on vercel and then a domain.
 
 ## How to Run the Application
 
