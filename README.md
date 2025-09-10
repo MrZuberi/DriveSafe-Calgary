@@ -125,3 +125,7 @@ Backend deployed on Heroku with environment variable configuration. Frontend dep
    npm start
    ```
    Frontend will start on `http://localhost:3000`
+
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
