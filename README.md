@@ -68,13 +68,6 @@ GET    /api/incident-with-cameras?id=     # Get incident + cameras
 │   │   └── manifest.json        # PWA configuration
 ```
 
-## Key Features
-**Intelligent Caching**: Backend caches API responses to reduce load on Calgary's servers
-**Distance Calculation**: Haversine formula for accurate camera-to-incident distances  
-**Error Handling**: Graceful fallbacks for broken camera feeds and API timeouts
-**Mobile Responsive**: Adaptive interface that detects device type and screen size
-**Auto-Refresh**: Live data updates without manual page refresh
-
 ## Deployment
 Backend deployed on Heroku with environment variable configuration. Frontend deployed on vercel and then a domain.
 
