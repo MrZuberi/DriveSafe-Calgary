@@ -1,7 +1,5 @@
 * { 
   box-sizing: border-box; 
-  
-  
 }
 
 html, body, #root { 
@@ -15,15 +13,16 @@ html, body, #root {
 }
 
 
+/* ─── Header ─────────────────────────────────────────────── */
+
 .header-left {
-  background: linear-gradient(135deg, rgba(48, 65, 110, 0.9) 0%, rgba(48, 65, 110, 0.9) 100%);
+  background: #1e2d5a;
   color: white;
   padding: 1rem 1.5rem;
   left: 0;
   top: 0;
   width: 570px;
   height: 140px;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,30 +30,43 @@ html, body, #root {
   text-align: left;
   z-index: 100;
   overflow: hidden;
-  border-radius: 0 0 20px 0;
+  border-radius: 0 0 18px 0;
   gap: 1rem;
   transform: translateX(500px);
   margin-left: -500px;
   margin-top: 3px;
-  border: 3px solid #FFFFFF;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 2px 4px 20px rgba(0,0,0,0.18);
+}
+
+/* Subtle inner highlight — gives depth without gradients */
+.header-left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, transparent 55%);
+  pointer-events: none;
 }
 
 .header-left h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   position: relative;
   z-index: 1;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .header-left p { 
-  margin: 0.2rem 0;
-  opacity: 0.95;
+  margin: 0.25rem 0 0;
+  opacity: 0.6;
+  font-size: 0.85rem;
   font-weight: 400;
   position: relative;
   z-index: 1;
+  letter-spacing: 0.01em;
 }
 
 .header-gif {
@@ -62,11 +74,13 @@ html, body, #root {
   height: 100%;
   max-width: 155px;
   max-height: 300px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
   flex-shrink: 0;
 }
 
+
+/* ─── Main layout ─────────────────────────────────────────── */
 
 .main-content {
   margin-left: 0;
@@ -76,33 +90,32 @@ html, body, #root {
   padding-left: 20px;
 }
 
-
 .header {
-  background: linear-gradient(135deg, rgba(48, 65, 110, 0.6) 100%, rgba(202, 12, 101, 0.6) 100%);
+  background: rgba(30,45,90,0.55);
   color: white;
   padding: 1.5rem 1rem;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
   max-width: 1900px;
   margin: auto;
   border-radius: 400px; 
+  box-shadow: 0 2px 12px rgba(30,45,90,0.15);
 }
 
 .header h1 {
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.2rem 0;
   font-size: 2rem;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   position: relative;
   z-index: 1;
 }
 
 .header p { 
   margin: 0;
-  font-size: 0.95rem;
-  opacity: 0.95;
+  font-size: 0.9rem;
+  opacity: 0.7;
   font-weight: 400;
   position: relative;
   z-index: 1;
@@ -114,7 +127,6 @@ html, body, #root {
   padding: 1.5rem 1rem;
 }
 
-
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -125,28 +137,32 @@ html, body, #root {
 }
 
 
+/* ─── Cards ───────────────────────────────────────────────── */
+
 .card {
   background: #ffffff;
-  border: 1px solid #dee2e6;
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .card:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.09);
   transform: translateY(-1px);
 }
 
 .card-header {
-  background: #f5f6f7;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #dee2e6;
+  background: #f8f9fb;
+  padding: 0.9rem 1.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
   font-weight: 600;
-  color: #004c8c;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+  color: #1e2d5a;
 }
 
 .right-panel-empty {
@@ -162,12 +178,14 @@ html, body, #root {
 }
 
 .right-panel-empty div:first-child {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 1rem;
   color: #444;
 }
 
+
+/* ─── Detail pane ─────────────────────────────────────────── */
 
 .details {
   padding: 1.25rem;
@@ -180,23 +198,28 @@ html, body, #root {
 
 .details h2 {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #d64545;
+  letter-spacing: -0.02em;
+  color: #c0392b;
   line-height: 1.3;
 }
 
-
 .section-title {
-  font-size: 1rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #004c8c;
-  margin: 1rem 0 0.8rem 0;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #1e2d5a;
+  margin: 1rem 0 0.75rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  opacity: 0.7;
 }
 
+
+/* ─── Camera grid ─────────────────────────────────────────── */
 
 .cam-grid {
   display: grid;
@@ -210,31 +233,34 @@ html, body, #root {
   height: 120px;
   object-fit: cover;
   cursor: pointer;
-  transition: all 0.2s ease;
-  background: #f5f6f7;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  background: #f0f1f3;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid rgba(0,0,0,0.07);
 }
 
 .cam-grid img:hover {
-  transform: scale(1.02);
+  opacity: 0.92;
+  transform: scale(1.015);
 }
 
 .cam-distance {
   padding: 0.2rem;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: #004c8c;
+  color: #1e2d5a;
   background: white;
 }
 
 
+/* ─── Search list ─────────────────────────────────────────── */
+
 .search-list {
   background: #ffffff;
-  border: 1px solid #dee2e6;
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.06);
   overflow: hidden;
   max-height: 400px;
   display: flex;
@@ -242,57 +268,62 @@ html, body, #root {
 }
 
 .search-bar {
-  padding: 1rem;
-  background: #f5f6f7;
-  border-bottom: 1px solid #dee2e6;
+  padding: 0.85rem 1rem;
+  background: #f8f9fb;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
   display: flex;
-  gap: 0.75rem;
+  gap: 0.65rem;
   align-items: center;
   flex-shrink: 0;
 }
 
 .search-bar input {
   flex: 1;
-  padding: 0.65rem 0.85rem;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 7px;
+  font-size: 0.88rem;
   background: white;
   color: #1a1d20;
-  transition: all 0.2s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  outline: none;
 }
 
 .search-bar input:focus {
-  outline: none;
-  border-color: #d64545;
-  box-shadow: 0 0 0 3px rgba(206, 14, 45, 0.1);
+  border-color: #c0392b;
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.09);
 }
 
 .search-bar input::placeholder {
-  color: #6c757d;
+  color: #adb1b8;
 }
 
 
+/* ─── Badges ──────────────────────────────────────────────── */
+
 .badge {
-  background: #f2b632;
-  color: #1a1d20;
-  padding: 0.4rem 0.8rem;
-  border-radius: 16px;
-  font-size: 0.8rem;
+  background: #fef0cd;
+  color: #7a5500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.74rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
 .badge.status {
-  background: #d64545;
-  color: white;
+  background: #fce8e6;
+  color: #c0392b;
 }
 
 .badge.time {
-  background: #004c8c;
-  color: white;
+  background: #e6ecf8;
+  color: #1e2d5a;
 }
 
+
+/* ─── Item list ───────────────────────────────────────────── */
 
 .item-list {
   flex: 1;
@@ -302,66 +333,85 @@ html, body, #root {
 }
 
 .item-list::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .item-list::-webkit-scrollbar-track {
-  background: #f5f6f7;
+  background: transparent;
 }
 
 .item-list::-webkit-scrollbar-thumb {
-  background: #999;
-  border-radius: 3px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
 }
 
 .item-list::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(0,0,0,0.28);
 }
 
 .item {
-  padding: 0.9rem 1.25rem;
-  border-bottom: 1px solid #e9ecef;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease;
   position: relative;
 }
 
+/* Left accent bar — replaces the janky translateX trick */
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2.5px;
+  border-radius: 0 2px 2px 0;
+  background: #c0392b;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
 .item:hover {
-  background: #f8f9fa;
-  transform: translateX(4px);
+  background: #fafbfc;
+}
+
+.item:hover::before {
+  opacity: 1;
 }
 
 .item-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   gap: 1rem;
 }
 
 .item-title {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: #1a1d20;
   line-height: 1.4;
   flex: 1;
 }
 
 .item-description {
-  font-size: 0.8rem;
-  color: #444;
+  font-size: 0.78rem;
+  color: #6b7280;
   line-height: 1.5;
 }
 
 
+/* ─── Modal ───────────────────────────────────────────────── */
+
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(10,14,30,0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(3px);
   z-index: 10000;
 }
 
@@ -369,17 +419,17 @@ html, body, #root {
   width: min(800px, 90vw);
   max-height: 85vh;
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .modal-header {
-  background: linear-gradient(135deg, #d64545 0%, #b93737 100%);
+  background: #c0392b;
   color: white;
-  padding: 1.25rem;
+  padding: 1.1rem 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -387,8 +437,9 @@ html, body, #root {
 }
 
 .modal-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -400,49 +451,56 @@ html, body, #root {
 }
 
 .close-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
   color: white;
-  padding: 0.4rem 0.8rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  transition: background 0.15s ease;
+  letter-spacing: 0.01em;
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
+  background: rgba(255,255,255,0.25);
 }
 
+
+/* ─── Inline modal content ────────────────────────────────── */
 
 .inline-modal-content {
   padding: 1.25rem;
   color: #444;
   margin-bottom: 1rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 
+/* ─── Leaflet ─────────────────────────────────────────────── */
+
 .leaflet-container {
   border-radius: 12px;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.06);
   height: 100% !important;
 }
 
 .leaflet-popup-content-wrapper {
   background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
 .leaflet-popup-content {
   color: #1a1d20;
+  font-size: 0.88rem;
 }
 
+
+/* ─── Responsive ──────────────────────────────────────────── */
 
 @media (max-width: 968px) {
   .header-left {
@@ -479,11 +537,11 @@ html, body, #root {
   }
   
   .header-left h1 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
   }
   
   .header-left p {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
   
   .container {
@@ -516,7 +574,7 @@ html, body, #root {
   }
   
   .details h2 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
   
   .search-list {
@@ -527,10 +585,10 @@ html, body, #root {
     width: 95vw;
     max-height: 90vh;
   }
-
-  
-  
 }
+
+
+/* ─── Car animation ───────────────────────────────────────── */
 
 .car-animation {
   margin-top: 1rem;
@@ -542,19 +600,12 @@ html, body, #root {
 
 .car-icon {
   font-size: 2rem;
-  animation: carMove 3s ease-in-out infinite;
+  animation: carBob 2.4s ease-in-out infinite;
 }
 
-@keyframes carMove {
-  0%, 100% { 
-    transform: translateX(0) rotate(0deg); 
-  }
-  25% { 
-    transform: translateX(15px) rotate(2deg); 
-  }
-  75% { 
-    transform: translateX(-15px) rotate(-2deg); 
-  }
+@keyframes carBob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%       { transform: translateY(-5px) rotate(1deg); }
 }
 
 .road-lines {
@@ -564,32 +615,17 @@ html, body, #root {
 }
 
 .road-line {
-  width: 30px;
+  width: 28px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255,255,255,0.6);
   border-radius: 1px;
-  animation: roadAnimation 2s linear infinite;
+  animation: roadPulse 1.8s ease-in-out infinite;
 }
 
-.road-line:nth-child(2) { 
-  animation-delay: 0.3s; 
-}
+.road-line:nth-child(2) { animation-delay: 0.3s; }
+.road-line:nth-child(3) { animation-delay: 0.6s; }
 
-.road-line:nth-child(3) { 
-  animation-delay: 0.6s; 
-}
-
-@keyframes roadAnimation {
-  0% { 
-    opacity: 1; 
-    transform: scaleX(1); 
-  }
-  50% { 
-    opacity: 0.4; 
-    transform: scaleX(0.6); 
-  }
-  100% { 
-    opacity: 1; 
-    transform: scaleX(1); 
-  }
+@keyframes roadPulse {
+  0%, 100% { opacity: 0.6; transform: scaleX(1); }
+  50%       { opacity: 0.2; transform: scaleX(0.5); }
 }
