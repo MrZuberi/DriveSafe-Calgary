@@ -23,21 +23,8 @@ const CALGARY_BOUNDS = [
   [51.215, -113.859],
 ];
 
-function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
-}
-
 function App() {
   const [incidents, setIncidents] = useState([]);
-  const [cameras, setCameras] = useState([]);
   const [selectedIncident, setSelectedIncident] = useState(null);
   const [nearestCameras, setNearestCameras] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -74,15 +61,8 @@ function App() {
   function loadCameras() {
     axios.get(`${API_BASE_URL}/api/cameras`)
       .then(function(response) {
-        const data = response.data;
-        
-        if (data && data.items) {
-          const cleanCameras = data.items.filter(camera => 
-            camera.coordinates && camera.coordinates.lat && camera.coordinates.lon && camera.url
-          );
-          
-          setCameras(cleanCameras);
-        }
+        // cameras are fetched on-demand via nearest-cameras endpoint
+        // this prefetch is kept for future use
       })
       .catch(function(error) {
         console.error("Error loading cameras:", error);
@@ -98,7 +78,7 @@ function App() {
     return function() {
       clearInterval(timer);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleSelectIncident(incident) {
     setSelectedIncident(incident);
@@ -331,7 +311,6 @@ function App() {
                                 style={{
                                     width: '100%',
                                     height: '60%',
-                                    //objectFit: 'cover'
                                   }}
                               />
                               <div className="cam-distance">
