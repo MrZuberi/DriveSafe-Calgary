@@ -5,7 +5,7 @@ A full-stack web application providing live traffic incident data, interactive m
 
 
 ## Live Demo
-**🌐 [View Live Application](www.drivesafecalgary.ca)**
+**🌐 [View Live Application]([www.drivesafecalgary.ca](https://www.drivesafecalgary.ca/))**
 
 A full-stack web application providing live traffic incident data, interactive mapping, and nearby traffic camera feeds for Calgary. Built with React frontend and Python Flask backend consuming Calgary Open Data APIs.
 
