@@ -31,8 +31,11 @@ function App() {
   const [showModal, setShowModal] = useState(null);
   const [showImageModal, setShowImageModal] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   function loadIncidents() {
+    setRefreshing(true);
     axios.get(`${API_BASE_URL}/api/incidents?limit=500`)
       .then(function(response) {
         const data = response.data;
@@ -48,10 +51,12 @@ function App() {
           setIncidents(cleanIncidents);
         }
         setIsLoading(false);
+        setTimeout(function() { setRefreshing(false); }, 600);
       })
       .catch(function(error) {
         console.error("Error loading incidents:", error);
         setIsLoading(false);
+        setRefreshing(false);
       });
   }
 
@@ -62,6 +67,16 @@ function App() {
       clearInterval(timer);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(function() {
+    function handleScroll() {
+      setShowScrollTop(window.scrollY > 400);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return function() {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   function handleSelectIncident(incident) {
     setSelectedIncident(incident);
@@ -133,6 +148,16 @@ function App() {
           <h1 style={{ fontSize: '32px' }}>DriveSafe Calgary</h1>
           <h2 style={{ fontSize: '16px' }}>Calgary Live Traffic Incidents</h2>
           <p style={{ fontSize: '14px' }}>Map | Details | Nearest Traffic Cameras | Updates</p>
+          <div style={{ marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ fontSize: '13px', background: 'rgba(0,76,140,0.15)', color: '#004c8c', borderRadius: '999px', padding: '2px 10px', fontWeight: 600 }}>
+              {incidents.length} incidents loaded
+            </span>
+            {refreshing && (
+              <span style={{ fontSize: '12px', color: '#e63946', fontWeight: 600, animation: 'pulse 0.6s ease-in-out' }}>
+                ↻ Refreshing...
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
@@ -216,7 +241,23 @@ function App() {
 
           <div className="search-list">
             <div className="search-bar">
-              <input placeholder="Search any recent incidents..." value={searchText} onChange={function(e) { setSearchText(e.target.value); }} />
+              <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                <input
+                  placeholder="Search any recent incidents..."
+                  value={searchText}
+                  onChange={function(e) { setSearchText(e.target.value); }}
+                  style={{ width: '100%', paddingRight: searchText ? '2rem' : undefined }}
+                />
+                {searchText && (
+                  <button
+                    onClick={function() { setSearchText(""); }}
+                    style={{ position: 'absolute', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: '#888', lineHeight: 1, padding: '0 0.2rem' }}
+                    aria-label="Clear search"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
               <div className="badge">{filteredIncidents.length} matches</div>
             </div>
             <div className="item-list">
@@ -272,6 +313,16 @@ function App() {
           <img src={showImageModal} alt="camera" style={{ maxWidth: "95vw", maxHeight: "95vh", borderRadius: "8px" }} onClick={function(e) { e.stopPropagation(); }} />
           <button className="close-btn" onClick={function() { setShowImageModal(null); }} style={{ position: "absolute", top: "1rem", right: "1rem" }}>Close</button>
         </div>
+      )}
+
+      {showScrollTop && (
+        <button
+          onClick={function() { window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          style={{ position: "fixed", bottom: "1.5rem", right: "1.5rem", zIndex: 9999, background: "#004c8c", color: "white", border: "none", borderRadius: "50%", width: "44px", height: "44px", fontSize: "1.2rem", cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}
+          aria-label="Scroll to top"
+        >
+          ↑
+        </button>
       )}
     </div>
   );
