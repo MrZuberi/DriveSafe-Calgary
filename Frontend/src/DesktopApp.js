@@ -132,7 +132,6 @@ function App() {
         <div>
           <h1 style={{ fontSize: '32px' }}>DriveSafe Calgary</h1>
           <h2 style={{ fontSize: '16px' }}>Calgary Live Traffic Incidents</h2>
-          <p style={{ fontSize: '14px' }}>Map | Details | Nearest Traffic Cameras | Updates</p>
         </div>
       </div>
 
